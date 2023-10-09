@@ -1,0 +1,131 @@
+.nav-container {
+  width: 100vw;
+  background-color: #131313;
+}
+.desktop-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 103px;
+  flex-shrink: 0;
+  opacity: 0.2;
+  background-color: #131313;
+}
+@media screen and (max-width: 600px) {
+  .desktop-container {
+    display: none;
+  }
+}
+.link {
+  text-decoration: none;
+}
+.desktop-min-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.website-logo {
+  width: 135.001px;
+  height: 39px;
+  flex-shrink: 0;
+  margin-right: 10px;
+  color: red;
+}
+.desktop-ul-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+}
+.desktop-list {
+  color: #ffffff;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: HK Grotesk;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: -0.356px;
+  margin-right: 10px;
+}
+.desktop-list-select {
+  color: #ffffff;
+
+  font-family: HK Grotesk;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 26px; /* 162.5% */
+  letter-spacing: -0.356px;
+  margin-right: 10px;
+}
+.desktop-right-container {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 150px;
+}
+.icon {
+  margin-left: 10px;
+}
+.icon-select {
+  margin-left: 10px;
+  box-shadow: 1px 1px 1p 1px #ffffff;
+}
+.account-image-image {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+.account-image-image-select {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  margin-right: 10px;
+  box-shadow: 2px 2px 2px 2px #ffffff;
+}
+
+.mobile-container {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  height: 75px;
+  flex-shrink: 0;
+  opacity: 0.2;
+  background: transparent;
+}
+@media screen and (min-width: 700px) {
+  .mobile-container {
+    display: none;
+  }
+}
+.mobile-container-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  justify-content: center;
+}
+.mobile-logo {
+  width: 100px;
+  height: 27px;
+  flex-shrink: 0;
+}
+.mobile-ul-list {
+  display: flex;
+}
+.header-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-ul-list {
+  display: flex;
+  width: 100px;
+  justify-content: space-between;
+  padding-left: 6px;
+  padding-right: 6px;
+  align-items: center;
+  background-color: transparent;
+}
