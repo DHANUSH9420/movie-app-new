@@ -13,46 +13,46 @@ const MoreMovieDetails = props => {
     voteCount,
     voteAverage,
   } = movieDetails
-  const date = format(new Date(releaseDate), 'do-MMM-yyy')
+  const date = format(new Date(releaseDate), 'do MMM yyy')
   console.log(date)
 
   return (
     <div className="more-movie-container">
       <div className="more-con">
         <div className="column">
-          <p className="movie-heading">Genres</p>
-          <ul className="ul-list">
+          <h1 className="movie-heading">genres</h1>
+          <div className="ul-list">
             {genres.map(each => (
-              <li className="text-value" key={each.id}>
+              <p className="text-value" key={each.id}>
                 {each.name}
-              </li>
+              </p>
             ))}
-          </ul>
+          </div>
         </div>
         <div className="column">
-          <p className="movie-heading">Audio Available</p>
-          <ul className="ul-list">
+          <h1 className="movie-heading">Audio Available</h1>
+          <div className="ul-list">
             {spokenLanguages.map(each => (
-              <li className="text-value" key={each.id}>
+              <p className="text-value" key={each.id}>
                 {each.englishName}
-              </li>
+              </p>
             ))}
-          </ul>
+          </div>
         </div>
         <div className="column">
-          <p className="movie-heading">rating Count</p>
+          <h1 className="movie-heading">Rating Count</h1>
           <p className="text-value">{voteCount}</p>
-          <p className="movie-heading">Rating Average</p>
+          <h1 className="movie-heading">Rating Average</h1>
           <p className="text-value">{voteAverage}</p>
         </div>
         <div className="column">
-          <p className="movie-heading">Budget</p>
+          <h1 className="movie-heading">Budget</h1>
           <p className="text-value">{budget}</p>
-          <p className="movie-heading">Release Date</p>
+          <h1 className="movie-heading">Release Date</h1>
           <p className="text-value">{date}</p>
         </div>
       </div>
-      <p className="heading-more-heading">More like this </p>
+      <h1 className="heading-more-heading">More like this</h1>
       <ul className="similar-movie">
         {similarMovies.map(eachValue => (
           <SimilarMoviesItem eachValue={eachValue} key={eachValue.id} />

@@ -21,7 +21,7 @@ class PopularRoute extends Component {
   }
 
   getPopular = async () => {
-    this.setState({apiStatus: apiStatusContext.initial})
+    this.setState({apiStatus: apiStatusContext.inProgress})
 
     const api = 'https://apis.ccbp.in/movies-app/popular-movies'
     const jwtToken = Cookies.get('jwt_token')
@@ -86,7 +86,7 @@ class PopularRoute extends Component {
     return (
       <ul className="popular-ul-list">
         {popularList.map(each => (
-          <SimilarMoviesItem eachValue={each} />
+          <SimilarMoviesItem eachValue={each} key={each.id} />
         ))}
       </ul>
     )

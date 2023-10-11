@@ -1,0 +1,30 @@
+.failure-con {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.f-img {
+  width: 100px;
+}
+.f-text {
+  color: #fff;
+  font-family: HK Grotesk;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.f-button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  color: #131313;
+  align-self: center;
+}
+.center {
+  width: 80vw;
+  height: 100%;
+  width: 100%;
+}

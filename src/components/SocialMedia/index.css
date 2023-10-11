@@ -12,6 +12,10 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 8px;
+  list-style-type: none;
+  width: 250px;
+  justify-content: space-between;
+  margin-right: 10px;
 }
 .footer-button {
   color: #fff;

@@ -28,14 +28,20 @@
   padding-left: 20px;
 }
 
-.logo-image {
+.nav-image {
   margin: 0px 10px;
   height: 200px;
-  width: 240px;
+  width: 250px;
   margin-left: 5px;
   margin-right: 5px;
 }
-.slick-prev:before,
+@media screen and (max-width: 600px) {
+  .nav-image {
+    width: 140px;
+    height: 140px;
+  }
+}
+.lick-prev:before,
 .slick-next:before {
   color: grey;
 }

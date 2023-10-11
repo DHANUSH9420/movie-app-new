@@ -65,3 +65,9 @@
   line-height: 62px; /* 96.875% */
   padding-left: 20px;
 }
+@media screen and (max-width: 600px) {
+  .over {
+    font-size: 15px;
+    width: 350px;
+  }
+}

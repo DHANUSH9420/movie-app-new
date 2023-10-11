@@ -1,13 +1,10 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
-import {HiOutlineSearch} from 'react-icons/hi'
-import {RiPlayListAddFill} from 'react-icons/ri'
-import {AiOutlineCloseCircle} from 'react-icons/ai'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import UserDetails from '../../context/UserDetails'
-import SearchInput from '../SearchInput'
+import Header from '../Header'
+import Failure from '../Failure'
 import SimilarMoviesItem from '../SimilarMoviesItem'
+
 import './index.css'
 
 const apiStatusContext = {
@@ -19,26 +16,13 @@ const apiStatusContext = {
 
 class SearchRoute extends Component {
   state = {
-    mobileClick: false,
     searchValue: '',
     apiStatus: apiStatusContext.initial,
     searchDetails: [],
   }
 
-  componentDidMount() {
-    this.searchDisplay()
-  }
-
-  onClickList = () => {
-    this.setState({mobileClick: true})
-  }
-
-  onCloseClick = () => {
-    this.setState({mobileClick: false})
-  }
-
-  onSearch = event => {
-    this.setState({searchValue: event.target.value})
+  changeSearchInput = value => {
+    this.setState({searchValue: value})
   }
 
   searchDisplay = async () => {
@@ -82,27 +66,11 @@ class SearchRoute extends Component {
     </div>
   )
 
-  onClickTryAgain = () => {
+  onRetry = () => {
     this.searchDisplay()
   }
 
-  renderFailureView = () => (
-    <div className="failure-container">
-      <img
-        src="https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237417/Background-Complete_nug9sz.png"
-        alt="failure view"
-        className="failure-image"
-      />
-      <p className="failure-para">Something went wrong. Please try again</p>
-      <button
-        className="failure-button "
-        type="button"
-        onClick={this.onClickTryAgain}
-      >
-        Try Again
-      </button>
-    </div>
-  )
+  renderFailureView = () => <Failure onRetry={this.onRetry} />
 
   renderSearchView = () => {
     const {searchDetails, searchValue} = this.state
@@ -120,7 +88,7 @@ class SearchRoute extends Component {
               className="no-video-img"
             />
             <p className="no-video-text">
-              Your search for ${searchValue} did not find any matches.
+              Your search for {searchValue} did not find any matches.
             </p>
           </div>
         ) : (
@@ -149,184 +117,19 @@ class SearchRoute extends Component {
     }
   }
 
+  renderHeaderSearch = () => (
+    <Header
+      changeSearchInput={this.changeSearchInput}
+      searchDisplay={this.searchDisplay}
+    />
+  )
+
   render() {
     return (
-      <UserDetails.Consumer>
-        {value => {
-          const {activeTab, onChangeTab} = value
-          const {mobileClick, searchValue} = this.state
-
-          const onClickHome = () => {
-            onChangeTab('Home')
-          }
-          const onClickPopular = () => {
-            onChangeTab('Popular')
-          }
-          const onClickAccount = () => {
-            onChangeTab('Account')
-          }
-          const onClickSearch = () => {
-            onChangeTab('Search')
-          }
-          return (
-            <div className="searclcon" testid="search">
-              <nav className="nav-container">
-                <div className="desktop-container">
-                  <div className="desktop-min-container">
-                    <Link to="/" className="link">
-                      <img
-                        src="https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237436/Group_7399_egstvr.png"
-                        alt="website logo"
-                        className="website-logo"
-                      />
-                    </Link>
-                    <ul className="desktop-ul-list">
-                      <Link to="/" className="link">
-                        <li
-                          className={
-                            activeTab === 'Home'
-                              ? 'desktop-list-select'
-                              : 'desktop-list'
-                          }
-                          onClick={onClickHome}
-                        >
-                          Home
-                        </li>
-                      </Link>
-                      <Link to="/popular" className="link">
-                        <li
-                          className={
-                            activeTab === 'Popular'
-                              ? 'desktop-list-select'
-                              : 'desktop-list'
-                          }
-                          onClick={onClickPopular}
-                        >
-                          Popular
-                        </li>
-                      </Link>
-                    </ul>
-                  </div>
-                  <div className="desktop-right-containe">
-                    <div className="input-container">
-                      <input
-                        type="text"
-                        placeholder="search"
-                        onChange={this.onSearch}
-                        value={searchValue}
-                        className="input-1"
-                      />
-                      <button
-                        type="button"
-                        testid="searchButton"
-                        onClick={this.searchDisplay}
-                      >
-                        <HiOutlineSearch size={25} color="#ffffff" />
-                      </button>
-                    </div>
-                    <Link to="/account" className="link">
-                      <img
-                        src="https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237401/Avatar_rnsvpf.png"
-                        alt="account"
-                        className={
-                          activeTab === 'Account'
-                            ? 'account-image-image-select'
-                            : 'account-image-image'
-                        }
-                        onClick={onClickAccount}
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="mobile-container">
-                  <div className="mobile-container-nav ">
-                    <Link to="/" className="link">
-                      <img
-                        src="https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237436/Group_7399_egstvr.png"
-                        alt="website logo"
-                        className="mobile-logo"
-                      />
-                    </Link>
-                    <div className="mobile-ul-list">
-                      <div className="input-container">
-                        <input
-                          type="text"
-                          placeholder="search"
-                          onChange={this.onSearch}
-                          value={searchValue}
-                          className="input-1"
-                        />
-                        <button
-                          type="button"
-                          testid="searchButton"
-                          onClick={this.searchDisplay}
-                        >
-                          <HiOutlineSearch size={25} color="#ffffff" />
-                        </button>
-                      </div>
-                      <button
-                        className="header-button"
-                        type="button"
-                        onClick={this.onClickList}
-                      >
-                        <RiPlayListAddFill size={35} />
-                      </button>
-                    </div>
-                  </div>
-                  {mobileClick && (
-                    <ul className="mobile-ul-list">
-                      <Link to="/" className="link">
-                        <li
-                          className={
-                            activeTab === 'Home'
-                              ? 'desktop-list-select'
-                              : 'desktop-list'
-                          }
-                          onClick={onClickHome}
-                        >
-                          Home
-                        </li>
-                      </Link>
-                      <Link to="/popular" className="link">
-                        <li
-                          className={
-                            activeTab === 'Popular'
-                              ? 'desktop-list-select'
-                              : 'desktop-list'
-                          }
-                          onClick={onClickPopular}
-                        >
-                          Popular
-                        </li>
-                      </Link>
-                      <Link to="/account" className="link">
-                        <li
-                          className={
-                            activeTab === 'Account'
-                              ? 'desktop-list-select'
-                              : 'desktop-list'
-                          }
-                          onClick={onClickAccount}
-                        >
-                          Account
-                        </li>
-                      </Link>
-                      <button
-                        className="header-button"
-                        type="button"
-                        onClick={this.onCloseClick}
-                      >
-                        <AiOutlineCloseCircle size={27} />
-                      </button>
-                    </ul>
-                  )}
-                </div>
-              </nav>
-              {this.renderViewDisplay()}
-            </div>
-          )
-        }}
-      </UserDetails.Consumer>
+      <div className="searclcon" testid="search">
+        {this.renderHeaderSearch()}
+        {this.renderViewDisplay()}
+      </div>
     )
   }
 }

@@ -1,185 +1,137 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {HiOutlineSearch} from 'react-icons/hi'
-import {RiPlayListAddFill} from 'react-icons/ri'
-import {AiOutlineCloseCircle} from 'react-icons/ai'
-import UserDetails from '../../context/UserDetails'
+import {AiFillCloseCircle} from 'react-icons/ai'
+import {MdMenuOpen} from 'react-icons/md'
 import './index.css'
 
 class Header extends Component {
-  state = {mobileClick: false}
+  state = {showMenu: false, currentPath: ''}
 
-  onClickList = () => {
-    this.setState({mobileClick: true})
+  componentDidMount() {
+    const path = window.location.pathname
+    this.setState({currentPath: path})
   }
 
-  onCloseClick = () => {
-    this.setState({mobileClick: false})
+  showSearchInput = () => {
+    const {currentPath} = this.state
+    return currentPath === '/search'
+  }
+
+  onShowSearchInput = () => {
+    const {searchDisplay} = this.props
+    const showInput = this.showSearchInput()
+    if (showInput) {
+      searchDisplay()
+    }
+  }
+
+  toggleMenuItems = () => {
+    this.setState(prevState => ({showMenu: !prevState.showMenu}))
+  }
+
+  onChangeSearchInput = event => {
+    const {changeSearchInput} = this.props
+    changeSearchInput(event.target.value)
+  }
+
+  onKeyDownEnter = event => {
+    const {searchDisplay} = this.props
+    if (event.key === 'Enter') {
+      searchDisplay()
+    }
   }
 
   render() {
-    const {mobileClick} = this.state
-
+    const {showMenu, currentPath} = this.state
+    const showInput = this.showSearchInput()
+    const homeClassName = currentPath === '/' ? 'selected' : null
+    const popularClassName = currentPath === '/popular' ? 'selected' : null
+    const accountClassName = currentPath === '/account' ? 'selected' : null
     return (
-      <UserDetails.Consumer>
-        {value => {
-          const {activeTab, onChangeTab} = value
+      <nav>
+        <div className="navbar">
+          <div className="navbar-logo-link-container">
+            <Link to="/">
+              <img
+                src="https://res.cloudinary.com/dc2b69ycq/image/upload/v1669787785/Movies%20App/Movies_Logo_nu3gsl.png"
+                alt="website logo"
+                className="website-logo-2"
+              />
+            </Link>
 
-          const onClickHome = () => {
-            onChangeTab('Home')
-          }
-          const onClickPopular = () => {
-            onChangeTab('Popular')
-          }
-          const onClickAccount = () => {
-            onChangeTab('Account')
-          }
-          const onClickSearch = () => {
-            onChangeTab('Search')
-          }
-          return (
-            <nav className="nav-container">
-              <div className="desktop-container">
-                <div className="desktop-min-container">
-                  <Link to="/" className="link">
-                    <img
-                      src="https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237436/Group_7399_egstvr.png"
-                      alt="website logo"
-                      className="website-logo"
-                    />
-                  </Link>
-                  <ul className="desktop-ul-list">
-                    <Link to="/" className="link">
-                      <li
-                        className={
-                          activeTab === 'Home'
-                            ? 'desktop-list-select'
-                            : 'desktop-list'
-                        }
-                        onClick={onClickHome}
-                      >
-                        Home
-                      </li>
-                    </Link>
-                    <Link to="/popular" className="link">
-                      <li
-                        className={
-                          activeTab === 'Popular'
-                            ? 'desktop-list-select'
-                            : 'desktop-list'
-                        }
-                        onClick={onClickPopular}
-                      >
-                        Popular
-                      </li>
-                    </Link>
-                  </ul>
-                </div>
-                <div className="desktop-right-container">
-                  <Link to="/search" className="link">
-                    <HiOutlineSearch
-                      size={25}
-                      color="#ffffff"
-                      className={
-                        activeTab === 'Search' ? 'icon-select' : 'icon'
-                      }
-                      onClick={onClickSearch}
-                    />
-                  </Link>
-                  <Link to="/account" className="link">
-                    <img
-                      src="https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237401/Avatar_rnsvpf.png"
-                      alt="account"
-                      className={
-                        activeTab === 'Account'
-                          ? 'account-image-image-select'
-                          : 'account-image-image'
-                      }
-                      onClick={onClickAccount}
-                    />
-                  </Link>
-                </div>
-              </div>
-              <div className="mobile-container">
-                <div className="mobile-container-nav ">
-                  <Link to="/" className="link">
-                    <img
-                      src="https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237436/Group_7399_egstvr.png"
-                      alt="website logo"
-                      className="mobile-logo"
-                    />
-                  </Link>
-                  <div className="mobile-ul-list">
-                    <HiOutlineSearch
-                      size={25}
-                      color="#ffffff"
-                      className={
-                        activeTab === 'Search' ? 'icon-select' : 'icon'
-                      }
-                      onClick={onClickSearch}
-                    />
-                    <button
-                      className="header-button"
-                      type="button"
-                      onClick={this.onClickList}
-                    >
-                      <RiPlayListAddFill size={35} />
-                    </button>
-                  </div>
-                </div>
-                {mobileClick && (
-                  <ul className="mobile-ul-list">
-                    <Link to="/" className="link">
-                      <li
-                        className={
-                          activeTab === 'Home'
-                            ? 'desktop-list-select'
-                            : 'desktop-list'
-                        }
-                        onClick={onClickHome}
-                      >
-                        Home
-                      </li>
-                    </Link>
-                    <Link to="/popular" className="link">
-                      <li
-                        className={
-                          activeTab === 'Popular'
-                            ? 'desktop-list-select'
-                            : 'desktop-list'
-                        }
-                        onClick={onClickPopular}
-                      >
-                        Popular
-                      </li>
-                    </Link>
-                    <Link to="/account" className="link">
-                      <li
-                        className={
-                          activeTab === 'Account'
-                            ? 'desktop-list-select'
-                            : 'desktop-list'
-                        }
-                        onClick={onClickAccount}
-                      >
-                        Account
-                      </li>
-                    </Link>
-                    <button
-                      className="header-button"
-                      type="button"
-                      onClick={this.onCloseClick}
-                    >
-                      <AiOutlineCloseCircle size={27} />
-                    </button>
-                  </ul>
-                )}
-              </div>
-            </nav>
-          )
-        }}
-      </UserDetails.Consumer>
+            <ul className="header-link-container">
+              <Link to="/" className="route-link">
+                <li className={`header-link ${homeClassName}`}>Home</li>
+              </Link>
+              <Link to="/popular" className="route-link">
+                <li className={`header-link ${popularClassName}`}>Popular</li>
+              </Link>
+            </ul>
+          </div>
+          <div className="search-and-avatar">
+            <div className="search-container">
+              {showInput && (
+                <input
+                  type="search"
+                  className="search-input"
+                  onChange={this.onChangeSearchInput}
+                  onKeyDown={this.onKeyDownEnter}
+                />
+              )}
+              <Link to="/search">
+                <button
+                  type="button"
+                  className="search-button"
+                  onClick={this.onShowSearchInput}
+                  testid="searchButton"
+                >
+                  <HiOutlineSearch size={18} color="#ffffff" />
+                </button>
+              </Link>
+            </div>
+            <Link to="/account">
+              <img
+                src="https://res.cloudinary.com/dc2b69ycq/image/upload/v1669785109/Movies%20App/Vector_Avatar1_hiwft7.png"
+                alt="profile"
+                className="avatar-image"
+              />
+            </Link>
+            <button
+              type="button"
+              className="menu-button"
+              onClick={this.toggleMenuItems}
+            >
+              <MdMenuOpen />
+            </button>
+          </div>
+        </div>
+
+        {showMenu && (
+          <ul className="menu-link-container">
+            <Link to="/" className="route-link">
+              <li className={`menu-link ${homeClassName}`}>Home</li>
+            </Link>
+            <Link to="/popular" className="route-link">
+              <li className={`menu-link ${popularClassName}`}>Popular</li>
+            </Link>
+            <Link to="/account" className="route-link">
+              <li className={`menu-link ${accountClassName}`}>Account</li>
+            </Link>
+            <li>
+              <button
+                type="button"
+                className="close-button"
+                onClick={this.toggleMenuItems}
+              >
+                <AiFillCloseCircle />
+              </button>
+            </li>
+          </ul>
+        )}
+      </nav>
     )
   }
 }
+
 export default Header

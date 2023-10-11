@@ -48,7 +48,7 @@ class LoginForm extends Component {
 
   render() {
     const {username, password, showError, msgError} = this.state
-    const jwtToken = Cookies.get('jwt-token')
+    const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
@@ -82,6 +82,7 @@ class LoginForm extends Component {
                     PASSWORD
                   </label>
                   <input
+                    id="password"
                     className="input"
                     type="password"
                     placeholder="password"

@@ -137,8 +137,9 @@ class MovieDetailsRoute extends Component {
             backgroundImage: `url(${backdropPath})`,
             backgroundSize: 'cover',
             width: '100vw',
-            height: '450px',
+            height: '480px',
           }}
+          className="col"
         >
           <Header />
           <div className="movie-text-container">
@@ -150,8 +151,8 @@ class MovieDetailsRoute extends Component {
               <p className="movie-U-a">{certificate}</p>
               <p className="movie-year">{date.getFullYear()}</p>
             </div>
+            <p className="movie-description">{overview}</p>
             <div className="blur-bg">
-              <p className="movie-description">{overview}</p>
               <button className="button" type="button">
                 Play
               </button>

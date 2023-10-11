@@ -25,7 +25,7 @@ class HomeRoute extends Component {
   getTrending = async () => {
     this.setState({apiStatus: apiStatusContext.inProgress})
 
-    const api = 'https://apis.ccbp.in/movies-app/trending-movies'
+    const api = 'https://apis.ccbp.in/movies-app/originals'
     const jwt = Cookies.get('jwt_token')
     const options = {
       headers: {
@@ -79,7 +79,9 @@ class HomeRoute extends Component {
 
   renderDisplayView = () => {
     const {TrendingVideo} = this.state
-    const m = Math.ceil(Math.random() * 9)
+    const lenght = TrendingVideo.length
+    console.log(lenght)
+    const m = Math.ceil(Math.random() * (lenght - 1))
     const {backdropPath, overview, title} = TrendingVideo[m]
     console.log(m)
     console.log(title)
@@ -89,13 +91,14 @@ class HomeRoute extends Component {
         style={{
           backgroundImage: `url(${backdropPath})`,
           backgroundSize: 'cover',
-          height: '450px',
+          height: '500px',
           width: '100vw',
         }}
       >
+        <Header />
         <h1 className="he">{title}</h1>
         <div className="tt">
-          <p className="over">{overview}</p>
+          <h1 className="over">{overview}</h1>
           <button className="button" type="button">
             Play
           </button>
@@ -123,7 +126,6 @@ class HomeRoute extends Component {
   render() {
     return (
       <div className="home-container">
-        <Header />
         {this.renderView()}
         <HomeTrendingList />
         <HomeTopRatedList />

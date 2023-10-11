@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import './index.css'
 
 const NotFound = props => {
@@ -15,16 +16,18 @@ const NotFound = props => {
       />
       <h1 className="not-found-heading">Lost Your Way?</h1>
       <p className="not-found-para">
-        we are sorry the page you requested could not be found Please go back to
-        the homepage.
+        we are sorry, the page you requested could not be found Please go back
+        to the homepage.
       </p>
-      <button
-        className="not-found-button"
-        type="button"
-        onClick={onClickHomeButton}
-      >
-        go to Home
-      </button>
+      <Link to="/" className="link">
+        <button
+          className="not-found-button"
+          type="button"
+          onClick={onClickHomeButton}
+        >
+          Go to Home
+        </button>
+      </Link>
     </div>
   )
 }

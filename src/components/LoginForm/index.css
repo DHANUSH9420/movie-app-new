@@ -5,13 +5,10 @@
   width: 100vw;
   height: 100vh;
   flex-shrink: 0;
-  background: linear-gradient(
-      117deg,
-      rgba(0, 0, 0, 0.8) 0.46%,
-      rgba(0, 0, 0, 0) 100%
-    ),
-    url('https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237504/login-page_oouefi.png'),
+  background: url('https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237504/login-page_oouefi.png'),
     lightgray 50% / cover no-repeat;
+  padding-left: 20px;
+  padding-top: 20px;
 }
 
 .website-logo {
@@ -65,7 +62,7 @@
 }
 .input {
   width: 360px;
-  height: 64px;
+  height: 45px;
   flex-shrink: 0;
   background-color: #333333;
   color: #e2e8f0;

@@ -6,11 +6,11 @@ const SimilarMoviesItem = props => {
   const {id, posterPath, title} = eachValue
 
   return (
-    <Link to={`/movies/${id}`} className="link">
-      <li className="similar-list">
+    <li className="similar-list">
+      <Link to={`/movies/${id}`} className="link">
         <img src={posterPath} alt={title} className="img" />
-      </li>
-    </Link>
+      </Link>
+    </li>
   )
 }
 export default SimilarMoviesItem

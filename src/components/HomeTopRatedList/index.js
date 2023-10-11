@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import Slider from 'react-slick'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
+import Failure from '../Failure'
 import './index.css'
 
 const apiStatusContext = {
@@ -87,23 +88,11 @@ class HomeTopRatedList extends Component {
     </div>
   )
 
-  onClickTryAgain = () => {
+  onRetry = () => {
     this.getTopRated()
   }
 
-  renderFailureView = () => (
-    <div className="failure-con">
-      <img
-        src="https://res.cloudinary.com/dv0wkaiuj/image/upload/v1696237369/alert-triangle_icvhqm.png"
-        alt="failure view"
-        className="f-img"
-      />
-      <p className="f-text ">Something went wrong. Please try again</p>
-      <button className="f-button" type="button" onClick={this.onClickTryAgain}>
-        Try Again
-      </button>
-    </div>
-  )
+  renderFailureView = () => <Failure onRetry={this.onRetry} />
 
   renderDisplayView = () => {
     const {TrendingVideo} = this.state
@@ -111,17 +100,21 @@ class HomeTopRatedList extends Component {
     return (
       <div className="center">
         <Slider {...settings}>
-          {TrendingVideo.map(eachLogo => {
-            const {id, title, posterPath} = eachLogo
-
-            return (
-              <Link to={`/movies/${id}`} key={eachLogo.id} className="link">
-                <div className="slick-item">
-                  <img src={posterPath} alt={title} className="logo-image" />
-                </div>
-              </Link>
-            )
-          })}
+          {TrendingVideo.map(eachLogo => (
+            <Link
+              to={`/movies/${eachLogo.id}`}
+              key={eachLogo.id}
+              className="link"
+            >
+              <div className="slick-item">
+                <img
+                  src={eachLogo.posterPath}
+                  alt={eachLogo.title}
+                  className="nav-image"
+                />
+              </div>
+            </Link>
+          ))}
         </Slider>
       </div>
     )
@@ -145,7 +138,7 @@ class HomeTopRatedList extends Component {
   render() {
     return (
       <div className="top-container">
-        <p className="text">Top Rated</p>
+        <h1 className="text">Top Rated</h1>
         <div className="main-container">{this.renderView()}</div>
       </div>
     )
